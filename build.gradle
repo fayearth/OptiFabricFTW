@@ -1,3 +1,20 @@
+buildscript {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		mavenCentral()
+		maven {
+			name = "Jitpack"
+			url 'https://jitpack.io/'
+		}
+	}
+	dependencies {
+		classpath 'com.github.Chocohead.Fabric-Loom:fabric-loom:0d0261a'
+	}
+}
+
 plugins {
 	id 'fabric-loom' version '0.9-SNAPSHOT'
 	id 'maven-publish'
@@ -31,8 +48,25 @@ dependencies {
 	// You may need to force-disable transitiveness on them.
 }
 
+task unzip(type: Copy) {
+	def zipFile = file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")
+	def outputDir = file("${buildDir}/unpacked/dist")
+
+	if(outputDir.exists()){
+		outputDir.deleteDir()
+	}
+
+	from zipTree(zipFile)
+	into outputDir
+}
+
 processResources {
 	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
 
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version

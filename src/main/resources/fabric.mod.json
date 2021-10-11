@@ -1,38 +1,54 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "optifabricftw",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "OptiFabric",
+  "description": "OptiFabric is a mod that loads OptiFine into Fabric",
   "authors": [
-    "Me!"
+    "Modmuss50",
+    "Chocohead",
+    "Fayearth"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/optifabric",
+    "sources": "https://github.com/backryun/OptiFabricFTW"
+    "issues": "https://github.com/backryun/OptiFabricFTW/issues"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MPL-2.0",
+  "icon": "assets/optifabric/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.fabricmc.example.ExampleMod"
+    "mm:early_risers": [
+      "me.modmuss50.optifabric.mod.OptifabricSetup"
+    ],
+    "preLaunch": [
+      "me.modmuss50.optifabric.mod.OptifabricLoadGuard"
     ]
   },
+  "custom": {
+    "fabric-renderer-indigo:force_compatibility" : true
+  },
   "mixins": [
-    "modid.mixins.json"
+    "optifabric.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": "*",
-    "minecraft": "1.17.x",
+    "fabricloader": ">=0.12.0",
+    "minecraft": ["1.17", "1.17.1"],
+    "mm": ">=2.0",
     "java": ">=16"
   },
-  "suggests": {
-    "another-mod": "*"
+  "conflicts": {
+    "sodium": "*"
+  },
+  "breaks": {
+    "no_fog": "*",
+    "thallium": "*",
+    "xradiation": "*",
+    "cardinal-components-item": "<2.4.2",
+    "architectury": ">1.2.72 <1.3.77",
+    "meteor-client": ">=0.4.1"
   }
 }

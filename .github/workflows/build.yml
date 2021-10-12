@@ -33,6 +33,8 @@ jobs:
       - name: make gradle wrapper executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
+      - name: Mappings Migration
+        run: ./gradlew migrateMappings --mappings "1.17.1+build.40"
       - name: build
         run: ./gradlew build
       - name: capture build artifacts

@@ -10,13 +10,13 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import net.minecraft.client.options.GameOptions;
-import net.minecraft.client.options.KeyBinding;
-
 import me.modmuss50.optifabric.compat.InterceptingMixin;
 import me.modmuss50.optifabric.compat.LoudCoerce;
 import me.modmuss50.optifabric.compat.PlacatingSurrogate;
 import me.modmuss50.optifabric.compat.Shim;
+
+import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.options.KeyBinding;
 
 @Mixin(GameOptions.class)
 @InterceptingMixin("de/siphalor/amecs/impl/mixin/MixinGameOptions")

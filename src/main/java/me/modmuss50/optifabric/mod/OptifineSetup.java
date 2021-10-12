@@ -1,10 +1,32 @@
 package me.modmuss50.optifabric.mod;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import me.modmuss50.optifabric.mod.OptifineVersion.JarType;
+import me.modmuss50.optifabric.patcher.ClassCache;
+import me.modmuss50.optifabric.patcher.LambdaRebuilder;
+import me.modmuss50.optifabric.util.ASMUtils;
+import me.modmuss50.optifabric.util.ZipUtils;
+import me.modmuss50.optifabric.util.ZipUtils.ZipTransformer;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.impl.util.mappings.TinyRemapperMappingsHelper;
+import net.fabricmc.loader.launch.common.FabricLauncherBase;
+import net.fabricmc.loader.util.UrlConversionException;
+import net.fabricmc.loader.util.UrlUtil;
+import net.fabricmc.loader.util.mappings.TinyRemapperMappingsHelper;
+import net.fabricmc.mapping.tree.ClassDef;
+import net.fabricmc.mapping.tree.TinyTree;
+import net.fabricmc.tinyremapper.IMappingProvider;
+import net.fabricmc.tinyremapper.IMappingProvider.Member;
+import net.fabricmc.tinyremapper.OutputConsumerPath;
+import net.fabricmc.tinyremapper.OutputConsumerPath.Builder;
+import net.fabricmc.tinyremapper.TinyRemapper;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.tree.ClassNode;
+
+import java.io.*;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,35 +43,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipError;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.tree.ClassNode;
-
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.launch.common.FabricLauncherBase;
-import net.fabricmc.loader.util.UrlConversionException;
-import net.fabricmc.loader.util.UrlUtil;
-import net.fabricmc.loader.util.mappings.TinyRemapperMappingsHelper;
-import net.fabricmc.mapping.tree.ClassDef;
-import net.fabricmc.mapping.tree.TinyTree;
-
-import net.fabricmc.tinyremapper.IMappingProvider;
-import net.fabricmc.tinyremapper.OutputConsumerPath;
-import net.fabricmc.tinyremapper.TinyRemapper;
-import net.fabricmc.tinyremapper.IMappingProvider.Member;
-import net.fabricmc.tinyremapper.OutputConsumerPath.Builder;
-
-import me.modmuss50.optifabric.mod.OptifineVersion.JarType;
-import me.modmuss50.optifabric.patcher.ClassCache;
-import me.modmuss50.optifabric.patcher.LambdaRebuilder;
-import me.modmuss50.optifabric.util.ASMUtils;
-import me.modmuss50.optifabric.util.ZipUtils;
-import me.modmuss50.optifabric.util.ZipUtils.ZipTransformer;
 
 public class OptifineSetup {
 	public static Pair<File, ClassCache> getRuntime() throws IOException {

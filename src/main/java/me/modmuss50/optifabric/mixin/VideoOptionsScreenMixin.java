@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.client.gui.screen.VideoOptionsScreen;
-
 import net.fabricmc.loader.api.FabricLoader;
+
+import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
 
 @Mixin(VideoOptionsScreen.class)
 class VideoOptionsScreenMixin {

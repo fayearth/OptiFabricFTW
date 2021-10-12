@@ -12,8 +12,8 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/optifabric",
-    "sources": "https://github.com/backryun/OptiFabricFTW"
-    "issues": "https://github.com/backryun/OptiFabricFTW/issues"
+    "sources": "https://github.com/fayearth/OptiFabricFTW",
+    "issues": "https://github.com/fayearth/OptiFabricFTW/issues"
   },
 
   "license": "MPL-2.0",

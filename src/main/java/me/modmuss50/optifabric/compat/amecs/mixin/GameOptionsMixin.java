@@ -15,8 +15,8 @@ import me.modmuss50.optifabric.compat.LoudCoerce;
 import me.modmuss50.optifabric.compat.PlacatingSurrogate;
 import me.modmuss50.optifabric.compat.Shim;
 
-import net.minecraft.client.options.GameOptions;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.KeyBinding;
 
 @Mixin(GameOptions.class)
 @InterceptingMixin("de/siphalor/amecs/impl/mixin/MixinGameOptions")
